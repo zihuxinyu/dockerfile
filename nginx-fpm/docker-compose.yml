@@ -1,0 +1,24 @@
+webdata:
+  image: php:5.6.9-fpm
+  privileged: true
+  name:
+   - web-data
+  volumes:
+      - /Users/weibaohui/projects/pig/:/var/www/html
+  command:  echo 'data-only'
+
+phpfpm:
+  image: php:5.6.9-fpm
+  volumes_from:
+   - webdata
+
+web:
+  image: nginx
+  ports:
+    - "80:80"
+  volumes_from:
+     - webdata
+  volumes:
+    - ./nginx/:/etc/nginx/
+  links:
+    - phpfpm
