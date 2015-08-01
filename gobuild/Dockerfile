@@ -1,4 +1,3 @@
-
 FROM google/golang
 
 ADD ./gobuild.sh /
