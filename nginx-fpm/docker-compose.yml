@@ -1,23 +1,21 @@
-webdata:
-  image: php:5.6.9-fpm
+webphpdata:
+  image: webphpdata
   privileged: true
-  name:
-   - web-data
   volumes:
-      - /Users/weibaohui/projects/pig/:/var/www/html
-  command:  echo 'data-only'
+   - /var/www/html
+  command:  echo 'data-only-new'
 
 phpfpm:
-  image: php:5.6.9-fpm
+  image: dhub.8dat.com/php:5.6.9-fpm
   volumes_from:
-   - webdata
+   - webphpdata
 
 web:
-  image: nginx
+  image: dhub.8dat.com/nginx
   ports:
     - "80:80"
   volumes_from:
-     - webdata
+     - webphpdata
   volumes:
     - ./nginx/:/etc/nginx/
   links:
