@@ -1,4 +1,4 @@
-FROM jenkins:
+FROM jenkins:latest
 
 USER root
 
@@ -10,6 +10,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D78692
  && apt-get install -y sudo \
  && rm /etc/apt/sources.list.d/docker.list \
  && rm -rf /var/lib/apt/lists/*
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ADD docker-1.6.2 /usr/bin/docker
 RUN chmod +x /usr/bin/docker
